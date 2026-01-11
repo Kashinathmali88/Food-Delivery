@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Foods {
+  id          String   @id @default(cuid())
+  title       String
+  price       Float
+  category    String
+  image       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      UserRole @default(USER)
+  cartItem  Json     @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum DeliveryStatus {
+  CONFIRMED
+  PREPARING
+  SERVED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  COD
+  RAZORPAY
+}
+
+model Order {
+  id            String         @id @default(cuid())
+  userId        String
+  items         Json
+  amount        Float
+  address       Json
+  status        DeliveryStatus @default(CONFIRMED)
+  payment       Boolean        @default(false)
+  paymentMethod PaymentMethod  @default(COD)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
