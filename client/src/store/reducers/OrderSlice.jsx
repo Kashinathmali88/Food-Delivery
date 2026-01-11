@@ -7,7 +7,7 @@ export const palceOrder = createAsyncThunk(
   "order/placeOrder",
   async ({ items, amount, address }, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.post(`${baseUrl}/order/cod`, {
+      const response = await axiosClient.post(`${baseUrl}/api/v1/order/cod`, {
         items,
         amount,
         address,
@@ -26,7 +26,9 @@ export const getUserOrders = createAsyncThunk(
   "order/getUserOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.get(`${baseUrl}/order/user-orders`);
+      const response = await axiosClient.get(
+        `${baseUrl}/api/v1/order/user-orders`
+      );
       return response.data.orders;
     } catch (error) {
       rejectWithValue(error);

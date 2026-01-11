@@ -7,7 +7,7 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ productId, quantity }, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.post(`${baseUrl}/cart/add`, {
+      const response = await axiosClient.post(`${baseUrl}/api/v1/cart/add`, {
         productId,
         quantity,
       });
@@ -25,7 +25,7 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async ({ productId, quantity }, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.post(`${baseUrl}/cart/remove`, {
+      const response = await axiosClient.post(`${baseUrl}/api/v1/cart/remove`, {
         productId,
         quantity,
       });
@@ -43,7 +43,7 @@ export const getUserCart = createAsyncThunk(
   "cart/getUserCart",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.get(`${baseUrl}/cart/get`);
+      const response = await axiosClient.get(`${baseUrl}/api/v1/cart/get`);
       return response.data.cartItem.cartItem;
     } catch (error) {
       return rejectWithValue(error.message);
