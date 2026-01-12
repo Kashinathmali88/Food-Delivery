@@ -28,10 +28,15 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getFoodList());
-    dispatch(getUserCart());
-    dispatch(getUserOrders());
+    if (user) {
+      dispatch(getUserCart());
+      dispatch(getUserOrders());
+    }
   }, [user]);
+
+  useEffect(() => {
+    dispatch(getFoodList());
+  }, []);
 
   return (
     <>
