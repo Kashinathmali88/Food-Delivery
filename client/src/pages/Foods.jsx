@@ -7,11 +7,12 @@ import {
   selectFilter,
   setFilterFoods,
 } from "../store/reducers/FoodSlice";
+import Loading from "../componets/Loading";
 
 const Foods = () => {
   const dispatch = useDispatch();
   const { menu, filter, foods, filteredFoods, loading } = useSelector(
-    (state) => state.foods
+    (state) => state.foods,
   );
 
   useEffect(() => {
@@ -27,9 +28,9 @@ const Foods = () => {
       const newFood = foods.filter((f) => filter.includes(f.category));
       dispatch(setFilterFoods(newFood));
     }
-  }, [filter]);
+  }, [filter, foods]);
 
-  return (
+  return !loading ? (
     <div className="min-h-screen">
       {/* All foods */}
       <div className="w-full">
@@ -65,6 +66,8 @@ const Foods = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Loading size={20} />
   );
 };
 
