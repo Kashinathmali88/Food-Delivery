@@ -20,6 +20,7 @@ const App = () => {
   const dispatch = useDispatch();
   const [model, setModel] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const { foods } = useSelector((state) => state.foods);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -36,7 +37,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getFoodList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

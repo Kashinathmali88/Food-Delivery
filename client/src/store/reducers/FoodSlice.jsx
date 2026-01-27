@@ -11,7 +11,7 @@ export const getFoodList = createAsyncThunk(
     } catch (error) {
       rejectWithValue(error);
     }
-  }
+  },
 );
 
 const initialState = {
@@ -51,6 +51,7 @@ const foodSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.foods = action.payload;
+        state.filteredFoods = action.payload;
       })
       .addCase(getFoodList.rejected, (state, action) => {
         state.loading = false;

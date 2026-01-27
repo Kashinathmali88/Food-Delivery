@@ -28,7 +28,7 @@ const Foods = () => {
       const newFood = foods.filter((f) => filter.includes(f.category));
       dispatch(setFilterFoods(newFood));
     }
-  }, [filter, foods]);
+  }, [filter, foods, loading, dispatch]);
 
   return !loading ? (
     <div className="min-h-screen">
